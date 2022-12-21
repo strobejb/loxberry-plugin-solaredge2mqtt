@@ -1,0 +1,3 @@
+setuptools
+solaredge
+paho-mqtt

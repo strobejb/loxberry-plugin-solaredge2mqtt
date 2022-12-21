@@ -1,0 +1,9 @@
+.idea/
+.DS_Store
+.vscode/
+venv/
+config/general.cfg
+config/general.json
+config/se2mqtt-test.cfg
+.pyc
+bin/se2mqtt.log
