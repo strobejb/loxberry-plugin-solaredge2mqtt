@@ -11,7 +11,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+        with:
+          path: solaredge2mqtt
+          
       - name: Zip Folder
         run: zip -r ${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" ".git*"
 
