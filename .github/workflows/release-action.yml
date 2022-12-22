@@ -15,7 +15,7 @@ jobs:
           path: ${{ github.event.repository.name }}
           
       - name: Zip Folder
-        run: zip -r ${{ github.event.repository.name }}.zip . -x "\.git/*" "\.github/*" "\.git*"
+        run: zip -r ${{ github.event.repository.name }}.zip . -x '*.git*' '*.github*' 
 
       - name: Release
         uses: softprops/action-gh-release@v1
