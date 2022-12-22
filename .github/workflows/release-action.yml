@@ -15,7 +15,7 @@ jobs:
           path: solaredge2mqtt
           
       - name: Zip Folder
-        run: zip -r ${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" ".git*"
+        run: zip -r ${{ github.event.repository.name }}.zip . -x "\.git/*" "\.github/*" "\.git*"
 
       - name: Release
         uses: softprops/action-gh-release@v1
