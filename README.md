@@ -18,12 +18,11 @@ The plugin publishes the following inverter data to the MQTT topics below:
 
 | Topic | Value |
 | --- | --- |
+| `solaredge_grid_current_power` | Grid power import (or export) | 
+| `solaredge_pv_current_power` | Solar power generation | 
 | `solaredge_storage_current_power` | Battery power (nagative for charging, positive for drawing) | 
 | `solaredge_storage_charge_level` | Battery charge level (percent) | 
-| `solaredge_grid_current_power` | Grid power import (or export) | 
 | `solaredge_load_current_power` | Power consumption by the house | 
-| `solaredge_pv_current_power` | Solar power generation | 
-
 
 ## Miniserver config
 
