@@ -1,0 +1,52 @@
+name: Release auto Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'New tag name'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+        
+    - name: Extract version from tag
+      id: extractversion
+      shell: bash
+      run: echo "VERSION=$(echo ${{github.event.inputs.tag}} | cut -d "v" -f 2)" >> $GITHUB_OUTPUT
+
+    - name: Update module version with tag
+      shell: bash
+      run: |
+        sed -i -E "s|VERSION.*|VERSION=${{steps.extractversion.outputs.VERSION}}|g" plugin.cfg
+        sed -i -E "s|VERSION.*|VERSION=${{steps.extractversion.outputs.VERSION}}|g" release.cfg
+        git diff
+        cat plugin.cfg
+        cat release.cfg
+
+    # Building is simply zipping the entire source folder
+    - name: Build Plugin
+      run: zip -r ${{ github.event.repository.name }}.zip . -x '*.git*' '*.github*' 
+
+    # Create a new tag for this release
+    - name: Tag release
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "Update version: ${{ github.event.inputs.tag }}"
+        git tag ${{ github.event.inputs.tag }}
+        git push && git push origin ${{ github.event.inputs.tag }}
+        
+    - name: Create release
+      run: gh release create ${{ github.event.inputs.tag }} --verify-tag ${{ github.event.repository.name }}.zip
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
+      
