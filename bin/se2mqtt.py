@@ -64,7 +64,7 @@ def main(args):
     mqttd = data["Mqtt"]
     logging.info(f'MQTT Broker: {mqttd["Brokeruser"]}@{mqttd["Brokerhost"]}:{mqttd["Brokerport"]}')
 
-    mqclient = mqtt.Client("P1") #create new instance
+    mqclient = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,client_id="SE2MQTT", protocol=mqtt.MQTTv311) #create new instance
     mqclient.username_pw_set(username=mqttd["Brokeruser"], password=mqttd["Brokerpass"])
     mqclient.connect(mqttd["Brokerhost"], port=int(mqttd["Brokerport"]))
     mqclient.loop_start()
