@@ -46,8 +46,8 @@ It is suggest to use the new Energy Flow Monitor in Loxone 13.1, and the new met
 
 Testing the python component is possible on Windows / Linux:
 
-1. Copy `config/se2mqtt.py` to `config/se2mqtt-test.py
-2. Set the appropriate valyes for `APIKEY` and `SITEID` in the new `se2mqtt-test.py` and set `ENABLED=1`
+1. Copy `config/se2mqtt.py` to `config/se2mqtt-test.py`
+2. Set the appropriate values for `APIKEY` and `SITEID` in the new `se2mqtt-test.py` and set `ENABLED=1`
 3. Create a new file `config/general.json` with the following content:
 ```
 {
@@ -60,13 +60,12 @@ Testing the python component is possible on Windows / Linux:
     }
 }
 ```
-Obtain all the above values from the MQTT settings page on your loxberry. i.e.:
+Obtain all the above values from the MQTT settings page on your loxberry (https://loxberry/admin/system/mqtt.cgi)
 
-https://loxberry/admin/system/mqtt.cgi
-
+4. `cd` to  the `bin` directory
 4. Run `pip install -r requirements.txt` 
 5. Run `python se2mqtt.py` 
 
-The python script will read the SolarEdge data using the configured API & SiteID, and will publish to the `solaredge/#' topic. It will also display the result to stdout. 
+The python script will read the SolarEdge data using the configured API & SiteID, and will publish to the `solaredge/#` topic. It will also display the result to stdout. 
 
 When the plugin runs on Loxberry, it is invoked using a CRON-job every 5 minutes.
